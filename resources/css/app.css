@@ -1,0 +1,33 @@
+:root {
+    --fontColor: rgb(138, 179, 220);
+    --bg: rgb(165, 172, 179); 
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #313131;
+}
+
+.mainNavigation {
+    padding: 2rem;
+    color: var(--fontColor);
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card {
+    padding: 1rem;
+    background-color: var(--bg);
+    border-radius: 1rem;
+    margin: 0.5rem;
+}
