@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index', ["users" => User::all()] );
+        return view('user.index', ["users" => User::all(), "games" => Game::all()] );
     }
 
     /**
@@ -47,9 +48,9 @@ class UserController extends Controller
         }
 
         $data["avatar"] = $filename;
-        User::create($data);
+        $user = User::create($data);
 
-        auth()->login($data["username"]);
+        auth()->login($user);
 
         return redirect("/")->with("success", "User created successfully");
     }
@@ -65,9 +66,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('user.edit', ["user" => $user]);
     }
 
     /**

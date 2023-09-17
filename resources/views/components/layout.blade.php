@@ -23,7 +23,7 @@
                 </li>
                 <li>
                     @auth
-                        <a>
+                        <a href="{{ route('user.show', auth()->user()) }}" style="text-decoration: none; color: white;">
                             {{ auth()->user()->username }}
                         </a>
                     @else 
