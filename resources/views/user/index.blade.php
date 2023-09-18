@@ -17,15 +17,15 @@
             @endforeach
         </div>
 
-        <div style="">
+        <div style="width: 30%;display: flex;/*! justify-content: center; */align-items: center;flex-direction: column;">
             @foreach ($users as $user)
-                <x-card>
-                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                        <h3 style="flex-grow: 1;">
+                <x-card class="card--box">
+                    <div class="card--box--user">
+                        <h3>
                             {{ $user->username }}
                         </h3>
-                        <div style="margin: auto;">
-                            <img src="{{ $user->avatar }}" alt="" style="width: 40px; border-radius: 50%;">
+                        <div class="card--box-wrapper">
+                            <img src="{{ $user->avatar }}" alt="" class="card--box--wrapper--img">
                         </div>
                     </div>
                     <div style="display: flex; justify-content: space-between;">

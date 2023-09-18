@@ -26,8 +26,31 @@ body {
 }
 
 .card {
-    padding: 1rem;
-    background-color: var(--bg);
-    border-radius: 1rem;
+    padding: 1rem; 
+    background-color: rgba(170, 214, 216, 0.556); 
+    border-radius: 1rem; 
     margin: 0.5rem;
+}
+
+.card--box {
+    width: 50%;
+}
+
+.card--box--user {
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 1rem;
+}
+
+.card--box--user h3 {
+    flex-grow: 1;
+}
+
+.card--box--wrapper {
+    margin: auto;
+}
+
+.card--box--wrapper--img {
+    width: 40px; 
+    border-radius: 50%;
 }

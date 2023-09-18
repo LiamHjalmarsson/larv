@@ -15,6 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny", User::class);
+
         return view('user.index', ["users" => User::all(), "games" => Game::all()] );
     }
 
@@ -23,6 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize("create", User::class);
+
         return view('user.create');
     }
 
@@ -31,6 +35,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize("create", User::class);
+
         $data = $request->validate([
             'name' => 'required',
             'username' => 'required',
@@ -40,14 +46,14 @@ class UserController extends Controller
         ]);
 
         
-        if ($data["avatar"] !== null) {
+        if ($request->has("avatar")) {
             $filename = $request["username"] . "-" . uniqid() . ".jpg";
     
             $imageData = Image::make($request->file("avatar"))->fit(120)->encode("jpg");
             Storage::put("public/avatars/" . $filename, $imageData); 
+            $data["avatar"] = $filename;
         }
 
-        $data["avatar"] = $filename;
         $user = User::create($data);
 
         auth()->login($user);
@@ -60,6 +66,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize("view", $user);
         return view('user.show', ["user" => $user]);
     }
 
@@ -68,22 +75,29 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize("update", $user);
+
         return view('user.edit', ["user" => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->authorize("update", $user);
+        return back()->with("success", "user updated successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $this->authorize("delete", $user);
+
+        auth()->delete($user);
+        
+        return redirect("/")->with("success", 201);
     }
 }

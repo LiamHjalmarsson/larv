@@ -26,16 +26,40 @@
                         <a href="{{ route('user.show', auth()->user()) }}" style="text-decoration: none; color: white;">
                             {{ auth()->user()->username }}
                         </a>
+                        <form action="{{ route('auth.destroy', auth()->user()->id) }}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <button>
+                                Logout
+                            </button>
+                        </form>
                     @else 
                         <a style="color: white" href="{{ route('user.create') }}">
                             Create user 
                         </a>
+                        <form action="{{ route('auth.store') }}" method="POST">
+                            @csrf
+                            <input type="text">
+                            <input type="password">
+                            <button>
+                                Login
+                            </button>
+                        </form>
                     @endauth
                 </li>
             </ul>
         </nav>
 
         <div class="mainContainer">
+            <div>
+
+                @if (session()->has("success"))
+                    {{ session("success") }}            
+                @else 
+                    {{ session("error")  }}    
+                @endif
+                
+            </div>
             {{ $slot }}
         </div>
     </body>
