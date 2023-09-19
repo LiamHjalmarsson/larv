@@ -1,0 +1,29 @@
+.card {
+    padding: 1rem; 
+    background-color: rgba(170, 214, 216, 0.556); 
+    border-radius: 1rem; 
+    margin: 0.5rem;
+}
+
+.card__box {
+    width: 80%;
+}
+
+.card__box__user {
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 1rem;
+}
+
+.card__box__user__h3 {
+    flex-grow: 1;
+}
+
+.card--box--wrapper {
+    margin: auto;
+}
+
+.card__box__wrapper__img {
+    width: 40px; 
+    border-radius: 50%;
+}

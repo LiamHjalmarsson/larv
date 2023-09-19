@@ -19,13 +19,13 @@
 
         <div style="width: 30%;display: flex;/*! justify-content: center; */align-items: center;flex-direction: column;">
             @foreach ($users as $user)
-                <x-card class="card--box">
-                    <div class="card--box--user">
-                        <h3>
+                <x-card class="card__box">
+                    <div class="card__box__user">
+                        <h3 class="card__box__user__h3">
                             {{ $user->username }}
                         </h3>
-                        <div class="card--box-wrapper">
-                            <img src="{{ $user->avatar }}" alt="" class="card--box--wrapper--img">
+                        <div class="card__box__wrapper">
+                            <img src="{{ $user->avatar }}" alt="" class="card__box__wrapper__img">
                         </div>
                     </div>
                     <div style="display: flex; justify-content: space-between;">

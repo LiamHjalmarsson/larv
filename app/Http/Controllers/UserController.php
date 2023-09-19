@@ -86,6 +86,44 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->authorize("update", $user);
+
+        $request->validate([
+            "name" => "sometimes",
+            "username" => "sometimes",
+            "email" => "sometimes",
+            "avatar" => "sometimes",
+            "country" => "sometimes",
+            "city" => "sometimes"
+        ]);
+
+        $user->update([
+            "name" => $request->input("name"),
+            "username" => $request->input("username"),
+            "email" => $request->input("email"),
+            "country" => $request->input("country"),
+            "city" => $request->input("city"),
+        ]);
+    
+        
+        if ($request->hasFile("avatar")) {
+
+            $oldAvatar = $user->avatar;
+
+            $filename = $request["username"] . "-" . uniqid() . ".jpg";
+            $imageData = Image::make($request->file("avatar"))->fit(120)->encode("jpg");
+    
+            Storage::put("public/avatars/" . $filename, $imageData); 
+            $data["avatar"] = $filename;
+
+            $user->update(["avatar" => $filename ]);
+
+            if ($oldAvatar != "/fallback-avatar.jpg") {
+                // delete old avatar replacing the string from storage to public 
+                Storage::delete(str_replace("/storage/", "public/", $oldAvatar));
+            }
+        }
+
+
         return back()->with("success", "user updated successfully");
     }
 
@@ -96,8 +134,8 @@ class UserController extends Controller
     {
         $this->authorize("delete", $user);
 
-        auth()->delete($user);
+        $user->delete();
         
-        return redirect("/")->with("success", 201);
+        return redirect("/")->with("success", "User deleted successfully");
     }
 }

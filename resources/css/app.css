@@ -1,3 +1,9 @@
+@import './components/card.css';
+@import './components/a_button.css';
+@import './components/input.css';
+@import './components/form.css';
+@import './auth/authCreate.css';
+
 :root {
     --fontColor: rgb(138, 179, 220);
     --bg: rgb(165, 172, 179); 
@@ -13,6 +19,35 @@ body {
     background: #313131;
 }
 
+.nav {
+    padding: 2rem; 
+    color: white; 
+    display: flex; 
+    justify-content: space-between;
+}
+
+.nav__ul {
+    display: flex; 
+    justify-content: space-around; 
+    width: 30%;
+    list-style-type: none;
+}
+
+.nav__ul__li__a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav__div {
+    display: flex; 
+    gap: 1rem;
+}
+
+.nav__div__a {
+    text-decoration: none;
+    color: white;
+}
+
 .mainNavigation {
     padding: 2rem;
     color: var(--fontColor);
@@ -23,34 +58,4 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.card {
-    padding: 1rem; 
-    background-color: rgba(170, 214, 216, 0.556); 
-    border-radius: 1rem; 
-    margin: 0.5rem;
-}
-
-.card--box {
-    width: 50%;
-}
-
-.card--box--user {
-    display: flex; 
-    align-items: center; 
-    margin-bottom: 1rem;
-}
-
-.card--box--user h3 {
-    flex-grow: 1;
-}
-
-.card--box--wrapper {
-    margin: auto;
-}
-
-.card--box--wrapper--img {
-    width: 40px; 
-    border-radius: 50%;
 }

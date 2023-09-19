@@ -1,13 +1,17 @@
 <div>
     <input 
-        style="width: 100%"
+        {{ 
+            $attributes->class("component__input") 
+        }}
         id="{{ $name }}"
         type="{{ $type }}" 
         name="{{ $name }}" 
         value="{{ old($name) }}"
     />
 
-    @error($name)
-        {{ $message }}
-    @enderror 
+    <div {{ $attributes->class("component__input__error") }}>
+        @error($name)
+            {{ $message }}
+        @enderror 
+    </div>
 </div>

@@ -1,49 +1,49 @@
 <x-layout>
-    <h2 style="color: white;">
-        Create User
-    </h2>
-    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1rem; background: #9f7a7a; padding: 1rem; width: 40%;">
+    <x-form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data" >
         @csrf
 
-        <div style="display: flex; flex-direction: column;">
+        <div class="component__form__div">
             <label for="name">
                 Name
             </label>
             <x-input name="name" type="text" />   
         </div>
 
-        <div style="display: flex; flex-direction: column;">
+        <div class="component__form__div">
             <label for="username">
                 Username
             </label>
             <x-input name="username" type="text" />   
         </div>
 
-        <div style="display: flex; flex-direction: column;">
+        <div class="component__form__div">
             <label for="email">
                 Email
             </label>
             <x-input name="email" type="email" />   
         </div>
         
-        <div style="display: flex; flex-direction: column;">
+        <div class="component__form__div">
             <label for="password">
                 Password
             </label>
             <x-input name="password" type="password" />   
         </div>
         
-        <div style="display: flex; flex-direction: column;">
+        <div class="component__form__div">
             <label for="avatar">
                 Avatar
             </label>
             <x-input name="avatar" type="file" />   
         </div>
 
-        <div>
-            <button>
+        <div class="component__form__div__div">
+            <x-a_button href="{{ route('auth.create') }}" class="component__form__div__div__button">
+                Login
+            </x-a_button>
+            <button class="component__form__div__div__button">
                 Create user
             </button>
         </div>
-    </form>
+    </x-form>
 </x-layout>
