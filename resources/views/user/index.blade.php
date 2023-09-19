@@ -19,7 +19,7 @@
 
         <div style="width: 30%;display: flex;/*! justify-content: center; */align-items: center;flex-direction: column;">
             @foreach ($users as $user)
-                <x-card class="card__box">
+                <x-cards.card class="card__box">
                     <div class="card__box__user">
                         <h3 class="card__box__user__h3">
                             {{ $user->username }}
@@ -36,7 +36,7 @@
                             Freind
                         </p>
                     </div>
-                </x-card>
+                </x-cards.card>
             @endforeach
         </div>
 

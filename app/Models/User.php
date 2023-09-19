@@ -54,4 +54,13 @@ class User extends Authenticatable
             return $value ? '/storage/avatars/' . $value : '/default_avatar.png';
         });
     }
+
+    public function followings () {
+        return $this->hasMany(Follow::class, "user_id");
+    }
+
+    public function followers () {
+        return $this->hasMany(Follow::class, "followeduser");
+    }
+
 }

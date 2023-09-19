@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\Game;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,7 +68,14 @@ class UserController extends Controller
     public function show(User $user)
     {
         $this->authorize("view", $user);
-        return view('user.show', ["user" => $user]);
+        
+        $currentlyFollowing = 0;
+        
+        if (auth()->check()) {
+            $currentlyFollowing = Follow::where([["user_id", "=", auth()->user()->id], ["followeduser", "=", $user->id]])->count();
+        }
+
+        return view('user.show', ["user" => $user, "following" => $currentlyFollowing]);
     }
 
     /**

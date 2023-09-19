@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,8 @@ Route::get("", fn () => to_route("user.index"));
 Route::resource("auth", AuthController::class);
 
 Route::resource("user", UserController::class);
+
+Route::post("/user/{user:username}/follow", [FollowController::class, "store"]);
+Route::post("/user/{user:username}/unfollow", [FollowController::class, "destroy"]);
 
 Route::resource("game", GameController::class);
