@@ -1,0 +1,26 @@
+.Inputform {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.Inputform__input {
+    outline: none;
+    border: 0;
+    width: 100%;
+    border: 1px solid transparent;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transform: border-color ease-in 300ms;
+}
+
+.Inputform__inputError{
+    border: 1px solid red;
+    transform: border-color ease-in 300ms;
+}
+
+.Inputform__p {
+    /* color: red; */
+    text-align: center;
+}

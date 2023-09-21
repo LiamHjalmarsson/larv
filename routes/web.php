@@ -21,7 +21,8 @@ Route::get("", fn () => to_route("user.index"));
 
 Route::resource("auth", AuthController::class);
 
-Route::resource("user", UserController::class);
+Route::resource("user", UserController::class)->except(["show"]);
+Route::get('/user/{username}', [UserController::class, "show"]);
 
 Route::post("/user/{user:username}/follow", [FollowController::class, "store"]);
 Route::post("/user/{user:username}/unfollow", [FollowController::class, "destroy"]);

@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
@@ -18,7 +19,8 @@ class UserController extends Controller
     {
         $this->authorize("viewAny", User::class);
 
-        return view('user.index', ["users" => User::all(), "games" => Game::all()] );
+        return Inertia::render("User/Index", ["users" => User::all()]);
+        // return view('user.index', ["users" => User::all(), "games" => Game::all()] );
     }
 
     /**
@@ -28,6 +30,7 @@ class UserController extends Controller
     {
         $this->authorize("create", User::class);
 
+        return Inertia('User/Create');
         return view('user.create');
     }
 
@@ -59,23 +62,43 @@ class UserController extends Controller
 
         auth()->login($user);
 
-        return redirect("/")->with("success", "User created successfully");
+        return Inertia::render("User/", ["user" => $user]);
+        // return redirect("/")->with("success", "User created successfully");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $username)
     {
-        $this->authorize("view", $user);
+        $this->authorize('view', User::class);
         
-        $currentlyFollowing = 0;
-        
-        if (auth()->check()) {
-            $currentlyFollowing = Follow::where([["user_id", "=", auth()->user()->id], ["followeduser", "=", $user->id]])->count();
+        // Find the user by username
+        $user = User::where('username', $username)->first();
+
+        if (!$user) {
+            // Handle the case when the user is not found (e.g., display a 404 page)
+            abort(401);
         }
 
-        return view('user.show', ["user" => $user, "following" => $currentlyFollowing]);
+        // You can also check authorization here if needed
+        // $this->authorize('view', $user);
+
+        $currentlyFollowing = 0;
+
+        if (auth()->check()) {
+            $currentlyFollowing = Follow::where([
+                ['user_id', auth()->user()->id],
+                ['followeduser', $user->id]
+            ])->count();
+        }
+
+        // Pass user data and other necessary data to the Inertia view
+        return Inertia::render('User/Show', [
+            'user' => $user,
+            'currentlyFollowing' => $currentlyFollowing
+        ]);
+        // return view('user.show', ["user" => $user, "following" => $currentlyFollowing]);
     }
 
     /**

@@ -1,0 +1,13 @@
+.footer {
+    flex-shrink: 0;
+    background-color: #e0e0e0;
+    padding: 16px;
+}
+
+.footer__div {
+    text-align: center;
+}
+
+.footer__div__p {
+    font-size: 14px;
+}
